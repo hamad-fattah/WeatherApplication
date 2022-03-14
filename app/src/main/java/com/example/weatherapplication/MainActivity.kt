@@ -4,12 +4,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import com.example.weatherapplication.databinding.ActivityMainBinding
-import com.example.weatherapplication.databinding.FragmentHomeBinding
 import com.example.weatherapplication.presentation.adapter.CityAdapter
 import com.example.weatherapplication.presentation.viewmodel.CityViewModel
 import com.example.weatherapplication.presentation.viewmodel.CityViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var factory: CityViewModelFactory

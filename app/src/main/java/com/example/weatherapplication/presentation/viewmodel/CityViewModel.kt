@@ -9,26 +9,33 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.weatherapplication.data.model.CityResponse
-import com.example.weatherapplication.domain.usecase.GetCityUseCase
+import com.example.weatherapplication.data.model.Coord
+import com.example.weatherapplication.domain.usecase.CityUseCase
 import com.example.weatherapplication.util.Resource
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import retrofit2.Response
 import java.lang.Exception
 
 class CityViewModel(
     private val app:Application,
-    private val getCityUseCase: GetCityUseCase)
+    private val cityUseCase: CityUseCase)
     : AndroidViewModel(app)
  {
-     val city: MutableLiveData<Resource<CityResponse>> = MutableLiveData()
-     fun getCity(lat:Double,lon:Double,appid:String) =
+     val city: MutableLiveData<Resource<HashMap<Coord, CityResponse>>> = MutableLiveData()
+     fun getCity(vararg citiesCoord: Coord) =
          viewModelScope.launch(Dispatchers.IO) {
              city.postValue(Resource.Loading())
              try{
                  if(isNetworkAvailable(app)) {
-
-                     val apiResult = getCityUseCase.execute(lat,lon,appid)
-                     city.postValue(apiResult)
+                     val citiesWeather = HashMap<Coord, CityResponse>()
+                     for (coord in citiesCoord){
+                         cityUseCase.requestCityWeather(coord.lat, coord.lon).data?.let {
+                             citiesWeather[coord] = it
+                         }
+                     }
+                     city.postValue(Resource.Success(citiesWeather))
                  }else{
                      city.postValue(Resource.Error("Internet is not available"))
                  }

@@ -1,7 +1,9 @@
 package com.example.weatherapplication.presentation.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -11,6 +13,7 @@ import com.example.weatherapplication.databinding.CityListItemBinding
 class CityAdapter:RecyclerView.Adapter<CityAdapter.CityViewHolder>() {
 
     private val data = ArrayList<CityResponse>()
+    private val cityName = "Beirut"
 
     fun addCity(city: List<CityResponse>) {
         data.addAll(city)
@@ -19,7 +22,7 @@ class CityAdapter:RecyclerView.Adapter<CityAdapter.CityViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CityViewHolder {
         val binding = CityListItemBinding
-            .inflate(LayoutInflater.from(parent.context),parent,false)
+            .inflate(LayoutInflater.from(parent.context), parent, false)
         return CityViewHolder(binding)
     }
 
@@ -32,11 +35,15 @@ class CityAdapter:RecyclerView.Adapter<CityAdapter.CityViewHolder>() {
     }
 
     inner class CityViewHolder(
-        val binding: CityListItemBinding):
-        RecyclerView.ViewHolder(binding.root){
-        fun bind(city:CityResponse){
+        private val binding: CityListItemBinding
+    ) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(city: CityResponse) {
             binding.cityName.text = city.name
+            binding.cityTemp.text = city.main.temp.toString()
+            binding.cityHumidity.text = city.main.humidity.toString()
+            binding.cityWind.text = city.wind.speed.toString()
+
         }
     }
-
 }

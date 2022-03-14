@@ -1,6 +1,6 @@
 package com.example.weatherapplication.presentation.di
 
-import com.example.weatherapplication.data.CityDataSource
+import com.example.weatherapplication.data.datasource.network.CityDataSource
 import com.example.weatherapplication.domain.repository.CityRepository
 import com.example.weatherapplication.domain.repository.CityRepositoryImpl
 import dagger.Module
@@ -17,7 +17,7 @@ class Repository {
     fun provideCityRepository(
         cityDataSource: CityDataSource,
 
-    ): CityRepository {
+        ): CityRepository {
         return CityRepositoryImpl(
             cityDataSource
         )

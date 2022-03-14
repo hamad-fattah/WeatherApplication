@@ -1,7 +1,7 @@
 package com.example.weatherapplication.presentation.di
 
 import android.app.Application
-import com.example.weatherapplication.domain.usecase.GetCityUseCase
+import com.example.weatherapplication.domain.usecase.CityUseCase
 import com.example.weatherapplication.presentation.viewmodel.CityViewModelFactory
 import dagger.Module
 import dagger.Provides
@@ -16,11 +16,11 @@ class FactoryModule {
     @Provides
     fun provideCityViewModelFactory(
         application: Application,
-        getCityUseCase: GetCityUseCase
+        cityUseCase: CityUseCase
     ) : CityViewModelFactory{
         return CityViewModelFactory(
             application,
-            getCityUseCase
+            cityUseCase
         )
     }
 }

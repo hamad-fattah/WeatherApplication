@@ -1,5 +1,10 @@
 package com.example.weatherapplication.data.model
 
+import androidx.room.Entity
+
+@Entity(
+    tableName = "cities"
+)
 data class CityResponse(
     val base: String,
     val clouds: Clouds,

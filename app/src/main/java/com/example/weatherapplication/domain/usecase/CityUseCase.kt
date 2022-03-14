@@ -4,10 +4,10 @@ import com.example.weatherapplication.data.model.CityResponse
 import com.example.weatherapplication.domain.repository.CityRepository
 import com.example.weatherapplication.util.Resource
 
-class GetCityUseCase(
+class CityUseCase(
     private val cityRepository: CityRepository
 ) {
-    suspend fun execute(lat: Double, lon: Double, appid: String):Resource<CityResponse>{
-        return cityRepository.getCity(lat,lon,appid)
+    suspend fun requestCityWeather(lat: Double, lon: Double):Resource<CityResponse>{
+        return cityRepository.requestCityWeather(lat, lon)
     }
 }

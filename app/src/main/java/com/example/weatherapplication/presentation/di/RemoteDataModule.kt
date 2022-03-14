@@ -1,7 +1,7 @@
 package com.example.weatherapplication.presentation.di
 
-import com.example.weatherapplication.data.CityDataSource
-import com.example.weatherapplication.data.CityDataSourceImpl
+import com.example.weatherapplication.data.datasource.network.CityDataSource
+import com.example.weatherapplication.data.datasource.network.CityDataSourceImpl
 import com.example.weatherapplication.data.api.CityService
 import dagger.Module
 import dagger.Provides
@@ -16,7 +16,7 @@ class RemoteDataModule {
     @Provides
     fun provideCityRemoteDataSource(
         cityAPIService: CityService
-    ):CityDataSource{
+    ): CityDataSource {
         return CityDataSourceImpl(cityAPIService)
     }
 

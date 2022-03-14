@@ -1,4 +1,4 @@
-package com.example.weatherapplication.data
+package com.example.weatherapplication.data.datasource.network
 
 import com.example.weatherapplication.data.api.CityService
 import com.example.weatherapplication.data.model.CityResponse

@@ -1,7 +1,7 @@
 package com.example.weatherapplication.presentation.di
 
 import com.example.weatherapplication.domain.repository.CityRepository
-import com.example.weatherapplication.domain.usecase.GetCityUseCase
+import com.example.weatherapplication.domain.usecase.CityUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,7 +15,7 @@ class UseCaseModule {
     @Provides
     fun provideGetNewsheadLinesUseCase(
         cityRepository: CityRepository
-    ): GetCityUseCase {
-        return GetCityUseCase(cityRepository)
+    ): CityUseCase {
+        return CityUseCase(cityRepository)
     }
 }
