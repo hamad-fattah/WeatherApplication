@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.weatherapplication.R
 import com.example.weatherapplication.data.model.CityResponse
 import com.example.weatherapplication.databinding.CityListItemBinding
 
@@ -40,9 +41,12 @@ class CityAdapter:RecyclerView.Adapter<CityAdapter.CityViewHolder>() {
         RecyclerView.ViewHolder(binding.root) {
         fun bind(city: CityResponse) {
             binding.cityName.text = city.name
-            binding.cityTemp.text = city.main.temp.toString()
-            binding.cityHumidity.text = city.main.humidity.toString()
-            binding.cityWind.text = city.wind.speed.toString()
+            binding.cityTemp.text = String.format(itemView.context.getText(R.string.lblTemp).toString(),
+            "${city.main.temp}")
+            binding.cityHumidity.text = String.format(itemView.context.getText(R.string.lblHumidity).toString(),
+                "${city.main.humidity}")
+            binding.cityWind.text = String.format(itemView.context.getText(R.string.lblWind).toString(),
+                "${city.wind.speed}")
 
         }
     }

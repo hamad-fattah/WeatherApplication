@@ -10,7 +10,6 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weatherapplication.data.model.Coord
 import com.example.weatherapplication.databinding.FragmentHomeBinding
 import com.example.weatherapplication.presentation.adapter.CityAdapter

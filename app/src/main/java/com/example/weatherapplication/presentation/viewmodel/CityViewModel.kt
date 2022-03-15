@@ -7,20 +7,25 @@ import android.net.NetworkCapabilities
 import android.os.Build
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.example.weatherapplication.data.model.CityResponse
 import com.example.weatherapplication.data.model.Coord
+import com.example.weatherapplication.domain.usecase.AllSavedCityUseCase
 import com.example.weatherapplication.domain.usecase.CityUseCase
+import com.example.weatherapplication.domain.usecase.SavingCityUseCase
 import com.example.weatherapplication.util.Resource
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import retrofit2.Response
 import java.lang.Exception
 
 class CityViewModel(
     private val app:Application,
-    private val cityUseCase: CityUseCase)
+    private val cityUseCase: CityUseCase,
+    private val savingCityUseCase: SavingCityUseCase,
+    private val allSavedCityUseCase: AllSavedCityUseCase
+)
     : AndroidViewModel(app)
  {
      val city: MutableLiveData<Resource<HashMap<Coord, CityResponse>>> = MutableLiveData()
@@ -71,6 +76,13 @@ class CityViewModel(
              }
          }
          return false
-
      }
-}
+     fun saveCity(city: CityResponse) = viewModelScope.launch {
+         savingCityUseCase.execute(city)
+     }
+     fun getSavedCities() = liveData {
+         allSavedCityUseCase.execute().collect {
+             emit(it)
+         }
+     }
+ }

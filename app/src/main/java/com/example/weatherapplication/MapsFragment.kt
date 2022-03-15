@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.example.weatherapplication.databinding.FragmentMapsBinding
+import com.example.weatherapplication.presentation.viewmodel.CityViewModel
 import java.math.BigDecimal
 import java.math.RoundingMode
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -16,6 +17,7 @@ import com.google.android.gms.maps.model.LatLng
 class MapsFragment : Fragment() {
 
     private lateinit var binding: FragmentMapsBinding
+    private lateinit var viewModel: CityViewModel
     private val callback = OnMapReadyCallback { googleMap ->
         googleMap.setOnCameraIdleListener {
             var center : LatLng = googleMap.cameraPosition.target
