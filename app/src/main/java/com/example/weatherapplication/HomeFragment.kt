@@ -41,7 +41,6 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
@@ -56,6 +55,16 @@ class HomeFragment : Fragment() {
         fragmentHomeBinding.btnHomeToMap.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_mapsFragment)
         }
+        cityAdapter.setOnItemClickListener {
+            val bundle = Bundle().apply {
+                putSerializable("selected_city",it)
+            }
+            findNavController().navigate(
+                R.id.action_homeFragment_to_infoFragment,
+                bundle
+            )
+        }
+
     }
 
     private fun viewCityList() {
@@ -65,7 +74,7 @@ class HomeFragment : Fragment() {
             Coord(thirdLat, thirdLon),
             Coord(secondLat,secondLon)
         )
-        viewModel.city.observe(viewLifecycleOwner,) { it ->
+        viewModel.city.observe(viewLifecycleOwner) { it ->
             when (it) {
                 is Resource.Success -> {
 
@@ -105,6 +114,4 @@ class HomeFragment : Fragment() {
         isLoading = false
         fragmentHomeBinding.progressBar.visibility = View.INVISIBLE
     }
-
-
 }

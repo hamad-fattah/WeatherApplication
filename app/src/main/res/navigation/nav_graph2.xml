@@ -13,9 +13,25 @@
         <action
             android:id="@+id/action_homeFragment_to_mapsFragment"
             weatherApplication:destination="@id/mapsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_infoFragment"
+            weatherApplication:destination="@id/infoFragment" />
     </fragment>
     <fragment
         android:id="@+id/mapsFragment"
         android:name="com.example.weatherapplication.MapsFragment"
-        android:label="MapsFragment" />
+        android:label="MapsFragment" >
+        <action
+            android:id="@+id/action_mapsFragment_to_infoFragment"
+            weatherApplication:destination="@id/infoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/infoFragment"
+        android:name="com.example.weatherapplication.InfoFragment"
+        android:label="fragment_info"
+        tools:layout="@layout/fragment_info" >
+        <argument
+            android:name="selected_city"
+            weatherApplication:argType="com.example.weatherapplication.data.model.CityResponse"/>
+    </fragment>
 </navigation>

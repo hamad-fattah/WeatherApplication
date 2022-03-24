@@ -1,11 +1,7 @@
 package com.example.weatherapplication.presentation.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.recyclerview.widget.AsyncListDiffer
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapplication.R
 import com.example.weatherapplication.data.model.CityResponse
@@ -14,7 +10,6 @@ import com.example.weatherapplication.databinding.CityListItemBinding
 class CityAdapter:RecyclerView.Adapter<CityAdapter.CityViewHolder>() {
 
     private val data = ArrayList<CityResponse>()
-    private val cityName = "Beirut"
 
     fun addCity(city: List<CityResponse>) {
         data.addAll(city)
@@ -47,7 +42,17 @@ class CityAdapter:RecyclerView.Adapter<CityAdapter.CityViewHolder>() {
                 "${city.main.humidity}")
             binding.cityWind.text = String.format(itemView.context.getText(R.string.lblWind).toString(),
                 "${city.wind.speed}")
+            binding.root.setOnClickListener {
+                onItemClickListener?.let {
+                    it(city)
+                }
+            }
 
         }
+    }
+    private var onItemClickListener :((CityResponse)->Unit)?=null
+
+    fun setOnItemClickListener(listener : (CityResponse)->Unit){
+        onItemClickListener = listener
     }
 }
