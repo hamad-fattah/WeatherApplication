@@ -13,6 +13,10 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 private val client = OkHttpClient()
+    .newBuilder()
+    .retryOnConnectionFailure(true)
+    .build()
+
 val idlingResource = OkHttp3IdlingResource.create("okhttp", client)
 
 @Module

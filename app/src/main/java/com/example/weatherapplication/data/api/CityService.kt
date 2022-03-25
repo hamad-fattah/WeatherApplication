@@ -13,6 +13,6 @@ interface CityService {
         @Query("lon")
         lon:Double,
         @Query("appid")
-        appid:String = "245ee60863f0e320995f8dedb437005a"
+        appid:String = "c6e381d8c7ff98f0fee43775817cf6ad"
     ) : Response<CityResponse>
 }

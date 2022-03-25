@@ -1,5 +1,6 @@
 package com.example.weatherapplication.presentation.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -11,6 +12,7 @@ class CityAdapter:RecyclerView.Adapter<CityAdapter.CityViewHolder>() {
 
     private val data = ArrayList<CityResponse>()
 
+    @SuppressLint("NotifyDataSetChanged")
     fun addCity(city: List<CityResponse>) {
         data.addAll(city)
         notifyDataSetChanged()

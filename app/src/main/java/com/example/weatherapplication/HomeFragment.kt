@@ -17,6 +17,9 @@ import com.example.weatherapplication.presentation.viewmodel.CityViewModel
 import com.example.weatherapplication.presentation.viewmodel.CityViewModelFactory
 import com.example.weatherapplication.util.Resource
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -28,14 +31,10 @@ class HomeFragment : Fragment() {
     private lateinit var viewModel: CityViewModel
     private   lateinit var fragmentHomeBinding: FragmentHomeBinding
     private var isLoading = false
-    private var lebanonLat : Double = 33.3
-    private var lebanonLon : Double = 33.3
-    private var firstPlaceLat : Double = 30.0
-    private var firstPlaceLon : Double = 30.0
-    private var secondLat : Double = 10.0
-    private var secondLon : Double = 10.0
-    private var thirdLat : Double = 31.0
-    private var thirdLon : Double = 32.3
+    private val beirutCoord : Coord = Coord(33.8938,35.5018)
+    private val parisCoord : Coord = Coord(48.8566,2.3522)
+    private val romeCoord : Coord = Coord(41.9028,12.4964)
+    private val madridCoord : Coord = Coord(40.4168,3.7038)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -68,13 +67,8 @@ class HomeFragment : Fragment() {
     }
 
     private fun viewCityList() {
-        viewModel.requestForecast(
-            Coord(lebanonLat, lebanonLon),
-            Coord(firstPlaceLat, firstPlaceLon),
-            Coord(thirdLat, thirdLon),
-            Coord(secondLat,secondLon)
-        )
-        viewModel.city.observe(viewLifecycleOwner) { it ->
+        defaultForecast()
+        viewModel.city.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Success -> {
 
@@ -113,5 +107,15 @@ class HomeFragment : Fragment() {
     private fun hideProgressBar(){
         isLoading = false
         fragmentHomeBinding.progressBar.visibility = View.INVISIBLE
+    }
+    private fun defaultForecast() {
+        CoroutineScope(Dispatchers.IO).launch {
+            viewModel.requestForecast(
+            Coord(beirutCoord.lat, beirutCoord.lon),
+            Coord(parisCoord.lat, parisCoord.lon),
+            Coord(romeCoord.lat, romeCoord.lon),
+            Coord(madridCoord.lat,madridCoord.lon)
+        ) }
+
     }
 }

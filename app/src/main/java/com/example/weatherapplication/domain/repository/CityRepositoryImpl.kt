@@ -7,7 +7,7 @@ import com.example.weatherapplication.util.Resource
 import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 
-const val API = "245ee60863f0e320995f8dedb437005a"
+const val API = "c6e381d8c7ff98f0fee43775817cf6ad"
 
 class CityRepositoryImpl(
     private val cityDataSource: CityDataSource,
