@@ -11,7 +11,6 @@ import com.example.weatherapplication.presentation.viewmodel.CityViewModel
 
 class InfoFragment : Fragment() {
     private lateinit var binding: FragmentInfoBinding
-    private lateinit var viewModel: CityViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,12 +23,14 @@ class InfoFragment : Fragment() {
         binding = FragmentInfoBinding.bind(view)
         val args : InfoFragmentArgs by navArgs()
         val city = args.selectedCity
-        viewModel = (activity as MainActivity).viewModel
         binding.apply {
-            cityName1.text = city.name
-            cityTemp1.text = city.main.temp.toString()
-            cityHumidity1.text = city.main.humidity.toString()
-            cityWind1.text = city.wind.speed.toString()
+            cityName.text = city.name
+            binding.cityTemp.text = String.format(context?.getText(R.string.lblTempInfo).toString(),
+                "${city.main.temp}")
+            binding.cityHumidity.text = String.format(context?.getText(R.string.lblHumidityInfo).toString(),
+                "${city.main.humidity}")
+            binding.cityWind.text = String.format(context?.getText(R.string.lblWindInfo).toString(),
+                "${city.wind.speed}")
         }
     }
 }

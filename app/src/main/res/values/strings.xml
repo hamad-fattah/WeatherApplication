@@ -15,4 +15,8 @@
     <string name="lblTemp">%s°F</string>
     <string name="lblHumidity">%s g.kg-1</string>
     <string name="lblWind">%s mph</string>
+
+    <string name="lblTempInfo">Temperature %s°F</string>
+    <string name="lblHumidityInfo">Humidity :%s g.kg-1</string>
+    <string name="lblWindInfo">Wind Speed : %s mph</string>
 </resources>

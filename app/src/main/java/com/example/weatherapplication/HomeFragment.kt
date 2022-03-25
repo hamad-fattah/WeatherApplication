@@ -68,7 +68,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun viewCityList() {
-        viewModel.getCity(
+        viewModel.requestForecast(
             Coord(lebanonLat, lebanonLon),
             Coord(firstPlaceLat, firstPlaceLon),
             Coord(thirdLat, thirdLon),

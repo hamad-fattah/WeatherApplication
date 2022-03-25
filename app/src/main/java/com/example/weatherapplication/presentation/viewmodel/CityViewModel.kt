@@ -29,7 +29,7 @@ class CityViewModel(
     : AndroidViewModel(app)
  {
      val city: MutableLiveData<Resource<HashMap<Coord, CityResponse>>> = MutableLiveData()
-     fun getCity(vararg citiesCoord: Coord) =
+     fun requestForecast(vararg citiesCoord: Coord) =
          viewModelScope.launch(Dispatchers.IO) {
              city.postValue(Resource.Loading())
              try{
@@ -37,6 +37,7 @@ class CityViewModel(
                      val citiesWeather = HashMap<Coord, CityResponse>()
                      for (coord in citiesCoord){
                          cityUseCase.requestCityWeather(coord.lat, coord.lon).data?.let {
+                             saveForecast(it)
                              citiesWeather[coord] = it
                          }
                      }
@@ -77,10 +78,10 @@ class CityViewModel(
          }
          return false
      }
-     fun saveCity(city: CityResponse) = viewModelScope.launch {
+     fun saveForecast(city: CityResponse) = viewModelScope.launch {
          savingCityUseCase.execute(city)
      }
-     fun getSavedCities() = liveData {
+     fun getAllSavedForecast() = liveData {
          allSavedCityUseCase.execute().collect {
              emit(it)
          }

@@ -18,7 +18,7 @@
         tools:context=".MapsFragment" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/mapCursor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/maps_blue_dot"
@@ -28,7 +28,7 @@
         app:layout_constraintTop_toTopOf="@+id/map" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnMap"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
