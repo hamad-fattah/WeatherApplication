@@ -109,13 +109,10 @@ class HomeFragment : Fragment() {
         fragmentHomeBinding.progressBar.visibility = View.INVISIBLE
     }
     private fun defaultForecast() {
-        CoroutineScope(Dispatchers.IO).launch {
             viewModel.requestForecast(
             Coord(beirutCoord.lat, beirutCoord.lon),
             Coord(parisCoord.lat, parisCoord.lon),
             Coord(romeCoord.lat, romeCoord.lon),
             Coord(madridCoord.lat,madridCoord.lon)
         ) }
-
-    }
 }
